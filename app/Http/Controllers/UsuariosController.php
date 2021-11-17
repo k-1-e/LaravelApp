@@ -14,8 +14,9 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-        
-        return view('usuarios.index');
+        //$usuarios = \DB::table('users')->select('users.*')->orderBy('users.id','DESC')->get();
+        $usuarios = \DB::table('users')->select('users.*')->orderBy('users.id','DESC')->get();
+        return view('usuarios.index')->with('usuarios', $usuarios);
     }
 
     /**
