@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Usuarios;
+use App\Models\Users;
 use Illuminate\Http\Request;
 
-class UsuariosController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,9 +14,11 @@ class UsuariosController extends Controller
      */
     public function index()
     {
-        //$usuarios = \DB::table('users')->select('users.*')->orderBy('users.id','DESC')->get();
-        $usuarios = \DB::table('users')->select('users.*')->orderBy('users.id','DESC')->get();
-        return view('usuarios.index')->with('usuarios', $usuarios);
+        $usuarios = \DB::table('users')
+                    ->select('users.*')
+                    ->orderBy('users.id','DESC')
+                    ->get();
+        return view('users/index')->with('usuarios', $usuarios);
     }
 
     /**
@@ -43,10 +45,10 @@ class UsuariosController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Usuarios  $usuarios
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Usuarios $usuarios)
+    public function show($id)
     {
         //
     }
@@ -54,10 +56,10 @@ class UsuariosController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Usuarios  $usuarios
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Usuarios $usuarios)
+    public function edit($id)
     {
         //
     }
@@ -66,10 +68,10 @@ class UsuariosController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Usuarios  $usuarios
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Usuarios $usuarios)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -77,11 +79,12 @@ class UsuariosController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Usuarios  $usuarios
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Usuarios $usuarios)
+    public function destroy($id)
     {
-        //
+        Users::destroy($id);
+        return redirect('users');
     }
 }
